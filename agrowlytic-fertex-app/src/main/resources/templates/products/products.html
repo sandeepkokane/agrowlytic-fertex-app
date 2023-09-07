@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products : Agrowlytic Fertex</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+          integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+</head>
+<body>
+<div th:insert="fragments/navbar :: navbar"></div>
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-sm-4">
+            <h3>Product List</h3>
+        </div>
+        <div class="col-sm-4">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search Product" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="col-sm-2">
+            <a th:href="@{/products/new}" class="btn btn-primary btn-sm mb-3">
+                <i class="bi bi-plus-square"></i> <span class="ms-2">Add Product</span>
+            </a>
+        </div>
+        <div class="col-sm-2">
+            <a th:href="@{/products/download}" class="btn btn-primary btn-sm mb-3">
+                <i class="bi bi-file-earmark-excel"></i><span class="ms-2">Download</span>
+            </a>
+        </div>
+    </div>
+    <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Added Date</th>
+            <th>Last Updated Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product: ${product_list}">
+            <td th:text="${product.name}"></td>
+            <td><i class="bi bi-currency-rupee"></i><span th:text="${product.price}"></span></td>
+            <td th:text="${product.addedDate}"></td>
+            <td th:text="${product.updatedDate}"></td>
+            <td>
+                <a th:href="@{/products/update/{id}(id=${product.id})}" class="btn btn-primary btn-sm">
+                    <i class="bi bi-pencil-square"></i></a>
+            </td>
+            <td>
+                <a th:href="@{/products/delete/{id}(id=${product.id})}" class="btn btn-danger btn-sm">
+                    <i class="bi bi-trash3"></i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>
